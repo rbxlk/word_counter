@@ -12,10 +12,11 @@ end
 words = words_from_file(TEXT_FILE)
 
 # Create dictionary of word counts
-word_count = {}
+WORD_COUNT = {}
 words.each do |word|
-    # If this word is new, add it to word_count
-    word_count[word] = 0 unless word_count[word]
-    # ... else increment its count
-    word_count[word] += 1
+    WORD_COUNT[word] = 0 unless WORD_COUNT[word]
+    WORD_COUNT[word] += 1
 end
+
+# Show the most frequent words and their counts
+WORD_COUNT.sort_by {|word, count| count}.reverse[0...40].each {|word, count| puts "#{word}: #{count}"}
