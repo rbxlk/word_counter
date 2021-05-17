@@ -1,4 +1,5 @@
 TEXT_FILE = "romeo-juliet.txt"
+COMPARE_FILE = "hamlet.txt"
 
 # Load the words from a file
 def words_from_file(text_file)
@@ -10,6 +11,7 @@ end
 
 # Load the list of words in the text
 words = words_from_file(TEXT_FILE)
+compare = words_from_file(COMPARE_FILE).uniq
 
 # Create dictionary of word counts
 WORD_COUNT = {}
@@ -19,4 +21,9 @@ words.each do |word|
 end
 
 # Show the most frequent words and their counts
-WORD_COUNT.sort_by {|word, count| count}.reverse[0...40].each {|word, count| puts "#{word}: #{count}"}
+UNIQUE_WORDS = {}
+WORD_COUNT.each do |word, count|
+    UNIQUE_WORDS[word] = count unless compare.include? word
+end
+
+UNIQUE_WORDS.sort_by {|word, count| count}.reverse[0...40].each {|word, count| puts "#{word}: #{count}"}
